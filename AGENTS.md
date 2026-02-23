@@ -4,7 +4,8 @@
 このリポジトリは設計概要 `docs/project.md` を中心に構成されています。ここに CLI 仕様、出力形式、解析パイプラインが記載されています。  
 実装は `src/` 配下に置き、以下のモジュール分割に沿って配置してください。  
 例: `ProjectLoader`, `SyntaxAnalyzer`, `SemanticAnalyzer`, `DependencyCollector`, `GraphBuilder`, `RuleEvaluator`, `Exporter`。  
-将来 `src/CodeDepsJiro/` 配下に各コンポーネントの `*.cs` を置く想定です。
+現在は `src/CodeDepsJiro/` 配下に各コンポーネントの `*.cs` を配置しています。
+テストは `src/tests/CodeDepsJiro.Tests/` 配下に配置しています。
 
 ## Build, Test, and Development Commands
 現在の .NET CLI プロジェクトは `src/CodeDepsJiro/CodeDepsJiro.csproj` です。  
@@ -12,7 +13,8 @@
 - ビルド: `dotnet build src/CodeDepsJiro/CodeDepsJiro.csproj`
 - 実行: `dotnet run --project src/CodeDepsJiro/CodeDepsJiro.csproj -- ./MyProject.csproj`
 - 依存復元: `dotnet restore src/CodeDepsJiro/CodeDepsJiro.csproj`
-テストは未設定のため、導入後に `dotnet test` を追記してください。
+テストは xUnit を使用しています。  
+`dotnet test src/tests/CodeDepsJiro.Tests/CodeDepsJiro.Tests.csproj` で実行できます。
 
 ## Coding Style & Naming Conventions
 具体的なルールはまだありません。C# を追加する場合は一般的な .NET 規約に従ってください。
@@ -23,10 +25,11 @@
 フォーマッタやリンタ（`dotnet format`, `.editorconfig`）を導入したら追記します。
 
 ## Testing Guidelines
-テスト基盤は未設定です。導入時はフレームワーク（例: xUnit/NUnit）、命名規約（`*Tests.cs`）、ディレクトリ例（`tests/CodeDepsJiro.Tests/`）を明記してください。
+テスト基盤は xUnit を使用しています。  
+命名規約は `*Tests.cs`、ディレクトリは `src/tests/CodeDepsJiro.Tests/` です。
 
 ## Commit & Pull Request Guidelines
-このリポジトリにはまだ確立したコミット規約がありません。暫定として、命令形で簡潔に（例: `Add DOT exporter`）。PR には目的の説明、関連 Issue、出力例（Plain/DOT のスニペット）を含めてください。
+このリポジトリにはまだ確立したコミット規約がありません。暫定として、命令形で簡潔に（例: `Add JSON exporter`）。PR には目的の説明、関連 Issue、出力例（Plain/JSON/CSV のスニペット）を含めてください。
 
 ## Configuration & Security Notes
 入力は `.csproj` またはフォルダパスで、ルールファイル（例: `rules.json`）を受け取る設計です。未検証リポジトリを解析する場合、ファイルアクセス範囲とルール入力の取り扱いに注意してください。

@@ -3,7 +3,7 @@
 ## 現在の状況（要約）
 - 基本設計/詳細設計: 完了
 - 実装: コアパイプライン実装まで完了
-- テスト: 未着手
+- テスト: 進行中
 - ドキュメント: 主要ドキュメントを整備済み
 
 ## 1. 基本設計（High-Level Design）【完了】
@@ -52,12 +52,16 @@
 - `dotnet build src/CodeDepsJiro/CodeDepsJiro.csproj` が通る
 - `dotnet src/CodeDepsJiro/bin/Debug/net10.0/CodeDepsJiro.dll <path>` で動作
 
-## 4. テスト（Testing）【未着手】
+## 4. テスト（Testing）【進行中】
 目的は挙動の保証と回帰防止です。
-- テストプロジェクト追加（例: xUnit）
-- 解析対象を含む最小サンプルプロジェクトを用意
+- テストプロジェクト追加（xUnit）
 - 単体テスト: `DependencyCollector`, `GraphBuilder`
-- 期待出力のスナップショットテスト（Plain/JSON/CSV）
+- 出力スナップショットテスト（JSON/CSV）
+- 解析対象を含む最小サンプルプロジェクトを用意
+- ルール違反検出のテスト
+
+未完了:
+- 解析対象を含む最小サンプルプロジェクトの用意
 - ルール違反検出のテスト
 
 成果物:
@@ -73,7 +77,7 @@
 ## 次の作業（候補）
 - ルールファイルの JSON パースを実装
 - 循環依存検出（DFS で最小実装）
-- テスト基盤の導入
+- CLI 統合テストの追加
 
 ## 作業状況の管理
 - 方針は `docs/work-management.md` を参照
