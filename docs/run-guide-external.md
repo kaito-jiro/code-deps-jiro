@@ -14,25 +14,41 @@
 ../OtherProject/OtherProject.csproj
 ```
 
-## 3. ビルド
+## 3. Publish（Linux x64）
 
 ```
-dotnet build src/DepGraph/DepGraph.csproj
+dotnet publish src/DepGraph/DepGraph.csproj -c Release -r linux-x64 --self-contained false
 ```
 
 ## 4. 実行
 
 ### 4.1 `.csproj` を指定する場合
 ```
-dotnet bin/Debug/net10.0/DepGraph.dll ../OtherProject/OtherProject.csproj
+./src/DepGraph/bin/Release/net10.0/linux-x64/publish/DepGraph ../OtherProject/OtherProject.csproj
 ```
 
 ### 4.2 フォルダを指定する場合
 ```
-dotnet bin/Debug/net10.0/DepGraph.dll ../OtherProject
+./src/DepGraph/bin/Release/net10.0/linux-x64/publish/DepGraph ../OtherProject
 ```
 
-## 5. オプション
+## 5. dotnet で実行（クロスプラットフォーム）
+
+```
+dotnet build src/DepGraph/DepGraph.csproj
+```
+
+### 5.1 `.csproj` を指定する場合
+```
+dotnet src/DepGraph/bin/Debug/net10.0/DepGraph.dll ../OtherProject/OtherProject.csproj
+```
+
+### 5.2 フォルダを指定する場合
+```
+dotnet src/DepGraph/bin/Debug/net10.0/DepGraph.dll ../OtherProject
+```
+
+## 6. オプション
 - `--dot`: DOT 形式で出力
 - `--filter <pattern>`: 名前空間フィルタ
 - `--rules <file>`: ルールファイル指定
@@ -40,10 +56,14 @@ dotnet bin/Debug/net10.0/DepGraph.dll ../OtherProject
 
 例:
 ```
-dotnet bin/Debug/net10.0/DepGraph.dll ../OtherProject --dot --exclude *Tests*
+./src/DepGraph/bin/Release/net10.0/linux-x64/publish/DepGraph ../OtherProject --dot --exclude *Tests*
 ```
 
-## 6. 注意点
+```
+dotnet src/DepGraph/bin/Debug/net10.0/DepGraph.dll ../OtherProject --dot --exclude *Tests*
+```
+
+## 7. 注意点
 - 現時点では C# のみ対応
 - 解析失敗は警告として出力される
 - `bin/` と `obj/` は自動的に除外される

@@ -8,9 +8,16 @@ C#/.NET プロジェクトの依存関係を解析し、Plain または Graphviz
 - ルールファイルによるレイヤー違反検出
 
 ## 使い方
+### Publish（Linux x64）
+```
+dotnet publish src/DepGraph/DepGraph.csproj -c Release -r linux-x64 --self-contained false
+./src/DepGraph/bin/Release/net10.0/linux-x64/publish/DepGraph ./MyProject.csproj
+```
+
+### dotnet で実行（クロスプラットフォーム）
 ```
 dotnet build src/DepGraph/DepGraph.csproj
-dotnet bin/Debug/net10.0/DepGraph.dll ./MyProject.csproj
+dotnet src/DepGraph/bin/Debug/net10.0/DepGraph.dll ./MyProject.csproj
 ```
 
 ## ライセンス

@@ -8,9 +8,16 @@ A CLI tool that analyzes dependencies in C#/.NET projects and visualizes them as
 - Validate layer rules via a rules file
 
 ## Usage
+### Publish (Linux x64)
+```
+dotnet publish src/DepGraph/DepGraph.csproj -c Release -r linux-x64 --self-contained false
+./src/DepGraph/bin/Release/net10.0/linux-x64/publish/DepGraph ./MyProject.csproj
+```
+
+### Run with dotnet (cross-platform)
 ```
 dotnet build src/DepGraph/DepGraph.csproj
-dotnet bin/Debug/net10.0/DepGraph.dll ./MyProject.csproj
+dotnet src/DepGraph/bin/Debug/net10.0/DepGraph.dll ./MyProject.csproj
 ```
 
 ## License
