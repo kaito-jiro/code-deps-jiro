@@ -14,7 +14,7 @@ C#/.NET プロジェクトの依存関係を解析し、CLI で可視化する�
 - 名前空間依存の集計
 - 循環依存検出
 - ルールファイルによるレイヤー依存の検査
-- 出力は Plain と DOT
+- 出力は Plain/JSON/CSV
 
 ## 4. 非スコープ（初期段階では扱わない）
 - UI アプリや Web UI
@@ -22,12 +22,12 @@ C#/.NET プロジェクトの依存関係を解析し、CLI で可視化する�
 - バイナリ解析
 
 ## 5. 入出力仕様（概要）
-入力はパスとオプション。出力は依存一覧または DOT グラフ。
+入力はパスとオプション。出力は依存一覧または機械可読フォーマット。
 
 ### 入力例
 ```
-depgraph ./MyProject.csproj
-depgraph ./src --dot --exclude *Tests* --filter ns:*UI*
+CodeDepsJiro ./MyProject.csproj
+CodeDepsJiro ./src --format json --exclude *Tests* --filter ns:*UI*
 ```
 
 ### 出力例（Plain）
@@ -36,11 +36,12 @@ Controller -> Service
 Service -> IRepository
 ```
 
-### 出力例（DOT）
-```
-digraph G {
-    UserController -> UserService;
-    UserService -> IUserRepository;
+### 出力例（JSON 抜粋）
+```json
+{
+  "edges": [
+    { "from": "UserController", "to": "UserService", "relationType": "Field" }
+  ]
 }
 ```
 
@@ -51,7 +52,7 @@ digraph G {
 - `DependencyCollector`: 依存抽出ルール適用
 - `GraphBuilder`: ノード/エッジ化、循環検出
 - `RuleEvaluator`: ルールファイル適用と違反判定
-- `Exporter`: Plain/DOT 変換
+- `Exporter`: Plain/JSON/CSV 変換
 
 ## 7. データモデル（概要）
 - `Node`: `Id`, `Name`, `Namespace`, `Kind`

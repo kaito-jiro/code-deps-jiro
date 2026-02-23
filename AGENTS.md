@@ -4,14 +4,14 @@
 このリポジトリは設計概要 `docs/project.md` を中心に構成されています。ここに CLI 仕様、出力形式、解析パイプラインが記載されています。  
 実装は `src/` 配下に置き、以下のモジュール分割に沿って配置してください。  
 例: `ProjectLoader`, `SyntaxAnalyzer`, `SemanticAnalyzer`, `DependencyCollector`, `GraphBuilder`, `RuleEvaluator`, `Exporter`。  
-将来 `src/depgraph/` 配下に各コンポーネントの `*.cs` を置く想定です。
+将来 `src/CodeDepsJiro/` 配下に各コンポーネントの `*.cs` を置く想定です。
 
 ## Build, Test, and Development Commands
-現在の .NET CLI プロジェクトは `src/DepGraph/DepGraph.csproj` です。  
+現在の .NET CLI プロジェクトは `src/CodeDepsJiro/CodeDepsJiro.csproj` です。  
 主要コマンドは以下です。
-- ビルド: `dotnet build src/DepGraph/DepGraph.csproj`
-- 実行: `dotnet run --project src/DepGraph/DepGraph.csproj -- ./MyProject.csproj`
-- 依存復元: `dotnet restore src/DepGraph/DepGraph.csproj`
+- ビルド: `dotnet build src/CodeDepsJiro/CodeDepsJiro.csproj`
+- 実行: `dotnet run --project src/CodeDepsJiro/CodeDepsJiro.csproj -- ./MyProject.csproj`
+- 依存復元: `dotnet restore src/CodeDepsJiro/CodeDepsJiro.csproj`
 テストは未設定のため、導入後に `dotnet test` を追記してください。
 
 ## Coding Style & Naming Conventions
@@ -23,7 +23,7 @@
 フォーマッタやリンタ（`dotnet format`, `.editorconfig`）を導入したら追記します。
 
 ## Testing Guidelines
-テスト基盤は未設定です。導入時はフレームワーク（例: xUnit/NUnit）、命名規約（`*Tests.cs`）、ディレクトリ例（`tests/DepGraph.Tests/`）を明記してください。
+テスト基盤は未設定です。導入時はフレームワーク（例: xUnit/NUnit）、命名規約（`*Tests.cs`）、ディレクトリ例（`tests/CodeDepsJiro.Tests/`）を明記してください。
 
 ## Commit & Pull Request Guidelines
 このリポジトリにはまだ確立したコミット規約がありません。暫定として、命令形で簡潔に（例: `Add DOT exporter`）。PR には目的の説明、関連 Issue、出力例（Plain/DOT のスニペット）を含めてください。

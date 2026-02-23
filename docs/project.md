@@ -1,8 +1,8 @@
-# depgraph — CLIベースの依存関係可視化ツール（設計概要）
+# code-deps-jiro — CLIベースの依存関係可視化ツール（設計概要）
 
 ## 1. 背景・目的
 
-`depgraph` は、.NET/C# プロジェクトを対象にコードの依存関係を解析し、クラス間・名前空間間の依存グラフを CLI で可視化する開発支援ツールです。
+`code-deps-jiro` は、.NET/C# プロジェクトを対象にコードの依存関係を解析し、クラス間・名前空間間の依存グラフを CLI で可視化する開発支援ツールです。
 
 目的は以下：
 
@@ -29,24 +29,18 @@
 Controller -> Service  
 Service -> IRepository  
 
-#### Graphviz DOT形式
-
-```
-digraph G {  
-    UserController -> UserService;  
-    UserService -> IUserRepository;  
-}
-```
-
-将来的に SVG/PNG 変換オプションも想定。
+#### JSON / CSV
+- 依存エッジを機械可読な形式で出力
+- 大規模プロジェクトでの後処理・集計に利用
 
 
 ## 3. CLI 使用例
-depgraph ./MyProject.csproj
+CodeDepsJiro ./MyProject.csproj
 
 ### オプション例
 
-- --dot               : DOT形式で出力
+- --format json       : JSON形式で出力
+- --output out.json   : 出力先ファイル
 - --filter ns:*UI*    : 名前空間フィルタ
 - --rules rules.json  : 依存ルールファイル指定
 - --exclude *Tests*   : 除外パス指定
@@ -62,7 +56,7 @@ depgraph ./MyProject.csproj
 ## 5. 解析アーキテクチャ
 
 ```
-depgraph/
+code-deps-jiro/
 ├─ Program.cs
 ├─ ProjectLoader
 ├─ SyntaxAnalyzer
@@ -103,7 +97,7 @@ depgraph/
 - レイヤールール違反検出
 
 #### Exporter
-- Plain / DOT形式で出力
+- Plain / JSON / CSV 形式で出力
 
 
 ## 6. 技術詳細
@@ -159,7 +153,7 @@ MyService -> IUserRepository
 ## 9. 成功の指標
 
 - クラス依存グラフが出力できる
-- DOT形式で可視化可能
+- JSON/CSV で機械処理できる
 - 循環依存が検出できる
 - ルール違反検出ができる
 

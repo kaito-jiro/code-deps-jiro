@@ -12,8 +12,8 @@
 - 入出力仕様の確定
 - 依存抽出の対象（クラス/インターフェース/継承/メソッド等）の優先順位
 - 解析パイプラインの責務分割（`ProjectLoader`〜`Exporter`）
-- CLI オプションの確定（`--dot`, `--filter`, `--rules`, `--exclude`）
-- 出力形式の最小要件（Plain/DOT）
+- CLI オプションの確定（`--format`, `--output`, `--filter`, `--rules`, `--exclude`）
+- 出力形式の最小要件（Plain/JSON/CSV）
 
 成果物:
 - 基本設計書: `docs/basic-design.md`
@@ -27,7 +27,7 @@
 - `DependencyCollector`: 依存抽出ルールと対象（フィールド/引数/戻り値/継承/実装/new）
 - `GraphBuilder`: ノード/エッジ生成、循環検出
 - `RuleEvaluator`: ルールファイルの読み込みと違反検出
-- `Exporter`: Plain/DOT 変換
+- `Exporter`: Plain/JSON/CSV 変換
 
 成果物:
 - 詳細設計書: `docs/detailed-design.md`
@@ -36,11 +36,11 @@
 
 ## 3. 実装（Implementation）【進行中】
 目的は最小実行可能な CLI を完成させることです。
-- `src/DepGraph` にコンポーネントの骨組みを作成
+- `src/CodeDepsJiro` にコンポーネントの骨組みを作成
 - CLI 引数パース（入力パス、オプション）
 - 解析パイプラインの接続（入力→依存抽出→出力）
 - `.csproj` 解析（Compile Include/Remove, ProjectReference 対応）
-- Plain/DOT 出力
+- Plain/JSON/CSV 出力
 - ルール評価の初期実装
 
 未完了:
@@ -49,15 +49,15 @@
 - 循環依存検出
 
 成果物:
-- `dotnet build src/DepGraph/DepGraph.csproj` が通る
-- `dotnet bin/Debug/net10.0/DepGraph.dll <path>` で動作
+- `dotnet build src/CodeDepsJiro/CodeDepsJiro.csproj` が通る
+- `dotnet src/CodeDepsJiro/bin/Debug/net10.0/CodeDepsJiro.dll <path>` で動作
 
 ## 4. テスト（Testing）【未着手】
 目的は挙動の保証と回帰防止です。
 - テストプロジェクト追加（例: xUnit）
 - 解析対象を含む最小サンプルプロジェクトを用意
 - 単体テスト: `DependencyCollector`, `GraphBuilder`
-- 期待出力のスナップショットテスト（Plain/DOT）
+- 期待出力のスナップショットテスト（Plain/JSON/CSV）
 - ルール違反検出のテスト
 
 成果物:

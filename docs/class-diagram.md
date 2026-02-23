@@ -6,7 +6,8 @@ classDiagram
 
     class Options {
         +string InputPath
-        +bool OutputDot
+        +OutputFormat OutputFormat
+        +string OutputPath
         +string FilterPattern
         +string RulesFile
         +string ExcludePattern
@@ -44,7 +45,11 @@ classDiagram
         +string Export(Graph graph, IReadOnlyList~RuleViolation~ violations)
     }
 
-    class DotExporter {
+    class JsonExporter {
+        +string Export(Graph graph, IReadOnlyList~RuleViolation~ violations)
+    }
+
+    class CsvExporter {
         +string Export(Graph graph, IReadOnlyList~RuleViolation~ violations)
     }
 
@@ -68,7 +73,8 @@ classDiagram
     Program --> GraphBuilder
     Program --> RuleEvaluator
     Program --> PlainTextExporter
-    Program --> DotExporter
+    Program --> JsonExporter
+    Program --> CsvExporter
 
     ArgumentParser --> Options
 
@@ -91,7 +97,8 @@ classDiagram
     RuleEvaluator --> RuleViolation
 
     PlainTextExporter --> Graph
-    DotExporter --> Graph
+    JsonExporter --> Graph
+    CsvExporter --> Graph
 ```
 
 ## CLI レイヤ
@@ -104,7 +111,8 @@ classDiagram
     }
     class Options {
         +string InputPath
-        +bool OutputDot
+        +OutputFormat OutputFormat
+        +string OutputPath
         +string FilterPattern
         +string RulesFile
         +string ExcludePattern
@@ -151,7 +159,10 @@ classDiagram
     class PlainTextExporter {
         +string Export(Graph graph, IReadOnlyList~RuleViolation~ violations)
     }
-    class DotExporter {
+    class JsonExporter {
+        +string Export(Graph graph, IReadOnlyList~RuleViolation~ violations)
+    }
+    class CsvExporter {
         +string Export(Graph graph, IReadOnlyList~RuleViolation~ violations)
     }
     class Graph
@@ -159,8 +170,10 @@ classDiagram
 
     PlainTextExporter --> Graph
     PlainTextExporter --> RuleViolation
-    DotExporter --> Graph
-    DotExporter --> RuleViolation
+    JsonExporter --> Graph
+    JsonExporter --> RuleViolation
+    CsvExporter --> Graph
+    CsvExporter --> RuleViolation
 ```
 
 ## Models レイヤ
