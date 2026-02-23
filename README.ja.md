@@ -9,7 +9,8 @@ C#/.NET プロジェクトの依存関係を解析し、Plain または Graphviz
 
 ## 使い方
 ```
-dotnet run --project src/DepGraph/DepGraph.csproj -- ./MyProject.csproj
+dotnet build src/DepGraph/DepGraph.csproj
+dotnet bin/Debug/net10.0/DepGraph.dll ./MyProject.csproj
 ```
 
 ## ライセンス

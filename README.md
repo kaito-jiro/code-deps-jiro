@@ -9,7 +9,8 @@ A CLI tool that analyzes dependencies in C#/.NET projects and visualizes them as
 
 ## Usage
 ```
-dotnet run --project src/DepGraph/DepGraph.csproj -- ./MyProject.csproj
+dotnet build src/DepGraph/DepGraph.csproj
+dotnet bin/Debug/net10.0/DepGraph.dll ./MyProject.csproj
 ```
 
 ## License
