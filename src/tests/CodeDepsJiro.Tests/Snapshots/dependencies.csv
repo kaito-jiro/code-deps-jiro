@@ -1,0 +1,6 @@
+From,To,RelationType
+Target,Dependency,Field
+Target,Dependency,Property
+Target,Dependency,Return
+Target,Dependency,Parameter
+Target,Dependency,New

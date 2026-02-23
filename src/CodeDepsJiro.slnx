@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="CodeDepsJiro/CodeDepsJiro.csproj" />
+  <Project Path="tests/CodeDepsJiro.Tests/CodeDepsJiro.Tests.csproj" />
 </Solution>

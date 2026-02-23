@@ -1,0 +1,40 @@
+{
+  "nodes": [
+    {
+      "name": "Target",
+      "kind": "Class"
+    },
+    {
+      "name": "Dependency",
+      "kind": "Class"
+    }
+  ],
+  "edges": [
+    {
+      "from": "Target",
+      "to": "Dependency",
+      "relationType": "Field"
+    },
+    {
+      "from": "Target",
+      "to": "Dependency",
+      "relationType": "Property"
+    },
+    {
+      "from": "Target",
+      "to": "Dependency",
+      "relationType": "Return"
+    },
+    {
+      "from": "Target",
+      "to": "Dependency",
+      "relationType": "Parameter"
+    },
+    {
+      "from": "Target",
+      "to": "Dependency",
+      "relationType": "New"
+    }
+  ],
+  "violations": []
+}
