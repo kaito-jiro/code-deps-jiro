@@ -43,9 +43,9 @@ MyApp.Controllers.UserController -> MyApp.Services.UserService
 JSON（抜粋）:
 ```json
 {
-  "edges": [
-    { "from": "MyApp.Services.UserService", "to": "MyApp.Data.UserRepository", "relationType": "Field" }
-  ]
+    "edges": [
+        { "from": "MyApp.Services.UserService", "to": "MyApp.Data.UserRepository", "relationType": "Field" }
+    ]
 }
 ```
 
