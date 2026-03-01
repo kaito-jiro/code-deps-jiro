@@ -41,6 +41,14 @@ classDiagram
         +IReadOnlyList~RuleViolation~ Evaluate(Graph graph, RuleSet ruleSet)
     }
 
+    class RuleSetLoader {
+        +RuleSet LoadFromFile(string path)
+    }
+
+    class RuleSetDto
+    class LayerRuleDto
+    class ViolationRuleDto
+
     class PlainTextExporter {
         +string Export(Graph graph, IReadOnlyList~RuleViolation~ violations)
     }
@@ -72,6 +80,7 @@ classDiagram
     Program --> DependencyCollector
     Program --> GraphBuilder
     Program --> RuleEvaluator
+    Program --> RuleSetLoader
     Program --> PlainTextExporter
     Program --> JsonExporter
     Program --> CsvExporter
@@ -95,6 +104,10 @@ classDiagram
     RuleSet --> LayerRule
     RuleSet --> ViolationRule
     RuleEvaluator --> RuleViolation
+    RuleSetLoader --> RuleSet
+    RuleSetLoader --> RuleSetDto
+    RuleSetDto --> LayerRuleDto
+    RuleSetDto --> ViolationRuleDto
 
     PlainTextExporter --> Graph
     JsonExporter --> Graph
@@ -143,6 +156,9 @@ classDiagram
     }
     class RuleEvaluator {
         +IReadOnlyList~RuleViolation~ Evaluate(Graph graph, RuleSet ruleSet)
+    }
+    class RuleSetLoader {
+        +RuleSet LoadFromFile(string path)
     }
 
     ProjectLoader --> SyntaxAnalyzer

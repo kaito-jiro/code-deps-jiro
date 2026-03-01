@@ -90,6 +90,17 @@
 - 仕様:
   - 名前空間とレイヤーパターンを照合
 
+### RuleSetLoader
+- 役割: ルールファイル（JSON）を読み込み `RuleSet` を構築
+- 入力: ルールファイルパス
+- 出力: `RuleSet`
+- 仕様:
+  - JSON 不正/必須項目欠落/空ファイルは `ArgumentException`
+  - `layers[].name` と `violations[].from/to` を必須とする
+
+### RuleSetDto / LayerRuleDto / ViolationRuleDto
+- 役割: ルールファイル読み込み用 DTO
+
 ## Exporter
 
 ### PlainTextExporter
@@ -101,6 +112,8 @@
 - 役割: 依存関係を JSON 形式で出力
 - 入力: `Graph`, `RuleViolation` 一覧
 - 出力: 文字列
+- 仕様:
+  - ルール違反は `violations` 配列に含める
 
 ### CsvExporter
 - 役割: 依存関係を CSV 形式で出力

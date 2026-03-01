@@ -50,9 +50,14 @@ flowchart TD
 - 役割: ルールファイルの適用と違反判定
 - 出力: `RuleViolation` の一覧
 
+### RuleSetLoader
+- 役割: ルールファイル（JSON）を読み込み `RuleSet` を構築
+- 出力: `RuleSet`
+
 ### Exporter
 - 役割: 依存情報の出力（Plain/JSON/CSV）
 - 出力: 文字列
+- ルール違反は JSON の `violations` にのみ含める
 
 ## 4. データモデル
 
@@ -100,6 +105,25 @@ CodeDepsJiro <path> [options]
     { "from": "Application", "to": "Infrastructure" }
   ]
 }
+```
+
+### 6.1 仕様詳細
+- `layers[].name`: 必須。レイヤー識別子
+- `layers[].patterns`: 任意。空配列可
+- `violations[].from/to`: 必須。レイヤー名を参照
+- JSON が不正、または必須項目が欠落している場合はエラーで終了
+
+### 6.2 読み込み処理フロー
+```mermaid
+flowchart TD
+  A[--rules <file>] --> B[Read JSON]
+  B --> C{Valid JSON?}
+  C -- No --> D[Error: Invalid JSON]
+  C -- Yes --> E[Validate Required Fields]
+  E --> F{Valid Rules?}
+  F -- No --> G[Error: Missing Fields]
+  F -- Yes --> H[Build RuleSet]
+  H --> I[Evaluate Graph]
 ```
 
 ## 7. エラーハンドリング

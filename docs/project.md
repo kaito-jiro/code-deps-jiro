@@ -32,6 +32,7 @@ Service -> IRepository
 #### JSON / CSV
 - 依存エッジを機械可読な形式で出力
 - 大規模プロジェクトでの後処理・集計に利用
+- ルール違反は JSON の `violations` にのみ出力
 
 
 ## 3. CLI 使用例
@@ -149,6 +150,8 @@ MyService -> IUserRepository
   ]
 }
 ```
+
+ルールファイル指定時は JSON を読み込み、レイヤー違反を評価する。
 
 ## 9. 成功の指標
 

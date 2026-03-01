@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using CodeDepsJiro.Cli;
 using CodeDepsJiro.DependencyCollector;
 using CodeDepsJiro.Exporter;
@@ -21,15 +19,20 @@ try
     var graphBuilder = new GraphBuilder();
     var ruleEvaluator = new RuleEvaluator();
 
+    // 解析対象のソースファイルを収集
     var sourceFiles = projectLoader.LoadSourceFiles(options.InputPath, options.ExcludePattern);
     var syntaxResult = syntaxAnalyzer.Analyze(sourceFiles);
     var semanticResult = semanticAnalyzer.Analyze(syntaxResult);
     var dependencies = dependencyCollector.Collect(semanticResult);
     var graph = graphBuilder.Build(dependencies);
 
-    // TODO: Load rules from options.RulesFile when implemented.
-    var violations = ruleEvaluator.Evaluate(graph, new RuleSet());
+    // ルールファイル指定時は読み込み、未指定時は空のルールセットを使用
+    var ruleSet = string.IsNullOrWhiteSpace(options.RulesFile)
+        ? new RuleSet()
+        : RuleSetLoader.LoadFromFile(options.RulesFile);
+    var violations = ruleEvaluator.Evaluate(graph, ruleSet);
 
+    // 出力形式に応じてエクスポーターを切り替え
     IExporter exporter = options.OutputFormat switch
     {
         OutputFormat.Json => new JsonExporter(),
@@ -40,6 +43,7 @@ try
 
     if (string.IsNullOrWhiteSpace(options.OutputPath))
     {
+        // 標準出力へ出力
         Console.WriteLine(output);
     }
     else
@@ -50,6 +54,7 @@ try
             Directory.CreateDirectory(directory);
         }
 
+        // ファイルへ出力
         File.WriteAllText(options.OutputPath, output);
     }
 }
