@@ -40,6 +40,33 @@ README は概要と最小限の使い方に絞り、詳細手順は `docs/run-gu
 ## Commit & Pull Request Guidelines
 このリポジトリにはまだ確立したコミット規約がありません。暫定として、命令形で簡潔に（例: `Add JSON exporter`）。PR には目的の説明、関連 Issue、出力例（Plain/JSON/CSV のスニペット）を含めてください。
 大きな仕様変更は `docs/project.md` と `docs/detailed-design.md` を同時に更新します。
+Issue を作成する際は「目的 / 仕様 / 完了条件 / 受け入れ」を含めます。
+例:
+```
+目的: 依存解析の精度を上げる
+仕様: ProjectLoaderでCompile Include/Removeを解決する
+完了条件: Include/Removeが反映される
+受け入れ: 小規模サンプルで期待通りのファイルが列挙される
+```
+PR 作成時は以下を含めます（関連Issueは必須、クローズする場合は `Closes #123` を併記）。
+例:
+```
+目的: JSON出力の可読性を上げる
+関連Issue: #123
+Closes #123
+変更内容: nodesをnamespaces配下に移動
+出力例(JSON):
+{
+    "namespaces": [
+        {
+            "name": "MyApp.Services",
+            "nodes": [
+                { "name": "UserService", "kind": "Class" }
+            ]
+        }
+    ]
+}
+```
 
 ## Configuration & Security Notes
 入力は `.csproj` またはフォルダパスで、ルールファイル（例: `rules.json`）を受け取る設計です。未検証リポジトリを解析する場合、ファイルアクセス範囲とルール入力の取り扱いに注意してください。
