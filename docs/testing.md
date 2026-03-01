@@ -29,6 +29,7 @@ dotnet test src/tests/CodeDepsJiro.Tests/CodeDepsJiro.Tests.csproj
 | `OutputSnapshotTests` | 結合/システム寄り | `SyntaxAnalyzer`〜`Exporter` | JSON/CSV 出力のスナップショット一致 |
 | `RuleSetLoaderTests` | 単体 | `RuleSetLoader` | ルールファイルの読み込み/入力バリデーション |
 | `RuleEvaluatorTests` | 単体 | `RuleEvaluator` | レイヤールール違反の検出 |
+| `ProjectLoaderCsprojTests` | 単体/結合の中間 | `ProjectLoader` | `Compile Include/Remove` と `ProjectReference` の解決 |
 
 ## テスト内容の詳細
 - `DependencyCollectorTests`（単体/結合の中間）: 単一ファイルに定義した `Target` が `Base`/`IService`/`Dependency`/`Other` に依存することを確認  
@@ -38,11 +39,11 @@ dotnet test src/tests/CodeDepsJiro.Tests/CodeDepsJiro.Tests.csproj
   - `SyntaxAnalyzer` → `SemanticAnalyzer` → `DependencyCollector` → `GraphBuilder` → `Exporter` の一連を通すため、結合〜システム寄りの検証
 - `RuleSetLoaderTests`（単体）: ルールファイルの正常系読み込みと必須項目欠落/不正 JSON の例外を確認
 - `RuleEvaluatorTests`（単体）: レイヤー一致/不一致と違反ルール適用の判定を確認
+- `ProjectLoaderCsprojTests`（単体/結合の中間）: `Compile Include/Remove` と `ProjectReference` の解決を確認
 
 ## 作成検討中のテスト
 | テスト名 | 種別 | 対象 | 目的 | 備考 |
 | --- | --- | --- | --- | --- |
 | `CliOptionsIntegrationTests` | 結合 | `ArgumentParser`〜`Exporter` | `--format/--output/--exclude` の組み合わせ動作 | CLI 仕様の安定化待ち |
-| `ProjectLoaderCsprojTests` | 単体/結合の中間 | `ProjectLoader` | `Compile Include/Remove` と `ProjectReference` の解決 | ケース設計が未着手 |
 | `RuleEvaluatorTests` | 単体 | `RuleEvaluator` | レイヤールール一致/不一致の検証 | ルールファイルのパースが未実装 |
 | `SemanticAnalyzerReferenceTests` | 単体/結合の中間 | `SemanticAnalyzer` | 参照解決が必要な型の解析可否 | 参照解決の対象範囲が未定 |

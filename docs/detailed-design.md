@@ -29,6 +29,10 @@ flowchart TD
 ### ProjectLoader
 - 役割: `.csproj` またはフォルダから `.cs` ファイル一覧を解決
 - 出力: 解析対象ファイルのパス一覧
+- 仕様:
+  - `Compile Include/Remove` を評価して対象ファイルを確定する
+  - `ProjectReference` を辿り、参照先の `.csproj` も解析対象に含める
+  - 参照の循環を避けるために訪問済みの `.csproj` を管理する
 
 ### SyntaxAnalyzer
 - 役割: 構文木生成と型宣言の抽出
