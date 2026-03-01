@@ -64,6 +64,21 @@ JSON（抜粋）:
 }
 ```
 
+ルール違反あり（JSON 抜粋）:
+```json
+{
+    "violations": [
+        {
+            "fromLayer": "Application",
+            "toLayer": "Infrastructure",
+            "from": "MyApp.Services.UserService",
+            "to": "MyApp.Data.UserRepository",
+            "relationType": "Field"
+        }
+    ]
+}
+```
+
 ## ライセンス
 MIT License。詳細は `LICENSE` を参照してください。
 

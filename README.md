@@ -64,6 +64,21 @@ JSON (excerpt):
 }
 ```
 
+JSON with rule violations (excerpt):
+```json
+{
+    "violations": [
+        {
+            "fromLayer": "Application",
+            "toLayer": "Infrastructure",
+            "from": "MyApp.Services.UserService",
+            "to": "MyApp.Data.UserRepository",
+            "relationType": "Field"
+        }
+    ]
+}
+```
+
 ## License
 MIT License. See `LICENSE` for details.
 

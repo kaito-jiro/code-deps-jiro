@@ -85,6 +85,25 @@ MyApp.Controllers.UserController -> MyApp.Services.UserService
 ./src/CodeDepsJiro/bin/Release/net10.0/linux-x64/publish/CodeDepsJiro ./path/to/MyProject --format json --output out/dependencies.json
 ```
 
+### 7.3 ルール違反の出力（JSON 抜粋）
+```
+./src/CodeDepsJiro/bin/Release/net10.0/linux-x64/publish/CodeDepsJiro ./path/to/MyProject --rules rules.json --format json --output out/dependencies.json
+```
+
+```json
+{
+    "violations": [
+        {
+            "fromLayer": "Application",
+            "toLayer": "Infrastructure",
+            "from": "MyApp.Services.UserService",
+            "to": "MyApp.Data.UserRepository",
+            "relationType": "Field"
+        }
+    ]
+}
+```
+
 ## 8. 注意点
 - 現時点では C# のみ対応
 - 解析失敗は警告として出力される
