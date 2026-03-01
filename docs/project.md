@@ -35,7 +35,7 @@ Service -> IRepository
 
 
 ## 3. CLI 使用例
-CodeDepsJiro ./MyProject.csproj
+CodeDepsJiro ./path/to/MyProject/MyProject.csproj
 
 ### オプション例
 

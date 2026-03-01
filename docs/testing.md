@@ -8,6 +8,7 @@
 ## 現在のテスト
 - フレームワーク: xUnit
 - プロジェクト: `src/tests/CodeDepsJiro.Tests/CodeDepsJiro.Tests.csproj`
+- スナップショット: `src/tests/CodeDepsJiro.Tests/Snapshots/` 配下の JSON/CSV
 
 ## 実行方法
 ```
@@ -18,6 +19,7 @@ dotnet test src/tests/CodeDepsJiro.Tests/CodeDepsJiro.Tests.csproj
 - テストクラスは `*Tests.cs`
 - テスト対象ごとにファイルを分割
 - 新規テストは `src/tests/CodeDepsJiro.Tests/` 配下に追加
+- スナップショット更新時は差分理由を明記し、出力仕様と整合を確認する
 
 ## テスト一覧
 | テスト名 | 種別 | 対象 | 検証内容 |
@@ -32,8 +34,6 @@ dotnet test src/tests/CodeDepsJiro.Tests/CodeDepsJiro.Tests.csproj
 - `GraphBuilderTests`（単体）: 同一 `Id` のノードが複数エッジに出ても `Nodes` が重複しないことを確認
 - `OutputSnapshotTests`（結合/システム寄り）: `dependencies.json` と `dependencies.csv` に対して出力が一致することを確認  
   - `SyntaxAnalyzer` → `SemanticAnalyzer` → `DependencyCollector` → `GraphBuilder` → `Exporter` の一連を通すため、結合〜システム寄りの検証
-
-
 
 ## 作成検討中のテスト
 | テスト名 | 種別 | 対象 | 目的 | 備考 |

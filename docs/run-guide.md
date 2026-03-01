@@ -9,16 +9,14 @@
 ## 2. 解析対象の用意
 `.csproj` もしくはフォルダパスを指定できます。
 
-### 2.1 本リポジトリ内のプロジェクトを解析する場合
+### 2.1 `.csproj` を指定する場合
 ```
-./samples/MyProject
-./samples/MyProject/MyProject.csproj
+./path/to/MyProject/MyProject.csproj
 ```
 
-### 2.2 本リポジトリ外のプロジェクトを解析する場合
+### 2.2 フォルダを指定する場合
 ```
-../OtherProject
-../OtherProject/OtherProject.csproj
+./path/to/MyProject
 ```
 
 ## 3. Publish（Linux x64）
@@ -31,12 +29,12 @@ dotnet publish src/CodeDepsJiro/CodeDepsJiro.csproj -c Release -r linux-x64 --se
 
 ### 4.1 `.csproj` を指定する場合
 ```
-./src/CodeDepsJiro/bin/Release/net10.0/linux-x64/publish/CodeDepsJiro ./samples/MyProject/MyProject.csproj
+./src/CodeDepsJiro/bin/Release/net10.0/linux-x64/publish/CodeDepsJiro ./path/to/MyProject/MyProject.csproj
 ```
 
 ### 4.2 フォルダを指定する場合
 ```
-./src/CodeDepsJiro/bin/Release/net10.0/linux-x64/publish/CodeDepsJiro ./samples/MyProject
+./src/CodeDepsJiro/bin/Release/net10.0/linux-x64/publish/CodeDepsJiro ./path/to/MyProject
 ```
 
 ## 5. dotnet で実行（クロスプラットフォーム）
@@ -47,12 +45,12 @@ dotnet build src/CodeDepsJiro/CodeDepsJiro.csproj
 
 ### 5.1 `.csproj` を指定する場合
 ```
-dotnet src/CodeDepsJiro/bin/Debug/net10.0/CodeDepsJiro.dll ./samples/MyProject/MyProject.csproj
+dotnet src/CodeDepsJiro/bin/Debug/net10.0/CodeDepsJiro.dll ./path/to/MyProject/MyProject.csproj
 ```
 
 ### 5.2 フォルダを指定する場合
 ```
-dotnet src/CodeDepsJiro/bin/Debug/net10.0/CodeDepsJiro.dll ./samples/MyProject
+dotnet src/CodeDepsJiro/bin/Debug/net10.0/CodeDepsJiro.dll ./path/to/MyProject
 ```
 
 ## 6. オプション
@@ -64,7 +62,7 @@ dotnet src/CodeDepsJiro/bin/Debug/net10.0/CodeDepsJiro.dll ./samples/MyProject
 
 例:
 ```
-./src/CodeDepsJiro/bin/Release/net10.0/linux-x64/publish/CodeDepsJiro ./samples/MyProject --format json --output out/code-deps-jiro.json
+./src/CodeDepsJiro/bin/Release/net10.0/linux-x64/publish/CodeDepsJiro ./path/to/MyProject --format json --output out/code-deps-jiro.json
 ```
 
 ```
@@ -72,10 +70,22 @@ dotnet src/CodeDepsJiro/bin/Debug/net10.0/CodeDepsJiro.dll ./samples/MyProject
 ```
 
 ```
-dotnet src/CodeDepsJiro/bin/Debug/net10.0/CodeDepsJiro.dll ./samples/MyProject --format csv --output out/code-deps-jiro.csv
+dotnet src/CodeDepsJiro/bin/Debug/net10.0/CodeDepsJiro.dll ./path/to/MyProject --format csv --output out/code-deps-jiro.csv
 ```
 
-## 7. 注意点
+## 7. 出力例
+### 7.1 標準出力（`--output` 未指定）
+```
+MyApp.Services.UserService -> MyApp.Data.UserRepository
+MyApp.Controllers.UserController -> MyApp.Services.UserService
+```
+
+### 7.2 ファイル出力（`--output` 指定）
+```
+./src/CodeDepsJiro/bin/Release/net10.0/linux-x64/publish/CodeDepsJiro ./path/to/MyProject --format json --output out/dependencies.json
+```
+
+## 8. 注意点
 - 現時点では C# のみ対応
 - 解析失敗は警告として出力される
 - `bin/` と `obj/` は自動的に除外される
