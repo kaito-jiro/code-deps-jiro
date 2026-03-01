@@ -6,6 +6,7 @@ C#/.NET プロジェクトの依存関係を解析し、Plain、JSON、CSV で�
 - クラス/名前空間の依存抽出
 - テキスト/JSON/CSV で依存エッジを出力
 - ルールファイルによるレイヤー違反検出
+- `.csproj` の `Compile Include/Remove` と `ProjectReference` を解決
 
 ## 使い方
 ### Publish（Linux x64）

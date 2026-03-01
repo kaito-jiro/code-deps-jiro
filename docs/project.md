@@ -74,6 +74,8 @@ code-deps-jiro/
 #### ProjectLoader
 - .csproj を読み込み
 - ソースファイル一覧を収集
+- `Compile Include/Remove` を評価して対象ファイルを確定する
+- `ProjectReference` を辿り参照先の `.csproj` を含める
 
 #### SyntaxAnalyzer
 - SyntaxTree を構築

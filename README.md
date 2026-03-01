@@ -6,6 +6,7 @@ A CLI tool that analyzes dependencies in C#/.NET projects and exports results as
 - Extract class and namespace dependencies
 - Export dependency edges to text, JSON, or CSV
 - Validate layer rules via a rules file
+- Resolve `.csproj` `Compile Include/Remove` and `ProjectReference`
 
 ## Usage
 ### Publish (Linux x64)
