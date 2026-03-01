@@ -114,6 +114,7 @@
 - 出力: 文字列
 - 仕様:
   - ルール違反は `violations` 配列に含める
+  - ノードは `namespaces` 配列にグルーピングする
 
 ### CsvExporter
 - 役割: 依存関係を CSV 形式で出力

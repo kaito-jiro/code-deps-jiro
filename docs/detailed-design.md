@@ -58,6 +58,7 @@ flowchart TD
 - 役割: 依存情報の出力（Plain/JSON/CSV）
 - 出力: 文字列
 - ルール違反は JSON の `violations` にのみ含める
+- JSON の `namespaces` にクラスノードをまとめる
 
 ## 4. データモデル
 

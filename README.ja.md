@@ -58,8 +58,16 @@ MyApp.Controllers.UserController -> MyApp.Services.UserService
 JSON（抜粋）:
 ```json
 {
+    "namespaces": [
+        {
+            "name": "MyApp.Services",
+            "nodes": [
+                { "name": "UserService", "kind": "Class" }
+            ]
+        }
+    ],
     "edges": [
-        { "from": "MyApp.Services.UserService", "to": "MyApp.Data.UserRepository", "relationType": "Field" }
+        { "from": "UserService", "to": "UserRepository", "relationType": "Field" }
     ]
 }
 ```

@@ -32,6 +32,7 @@ Service -> IRepository
 #### JSON / CSV
 - 依存エッジを機械可読な形式で出力
 - 大規模プロジェクトでの後処理・集計に利用
+- JSON は `namespaces` 配下にクラスノードをまとめる
 - ルール違反は JSON の `violations` にのみ出力
 
 

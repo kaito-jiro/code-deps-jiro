@@ -1,12 +1,17 @@
 {
-  "nodes": [
+  "namespaces": [
     {
-      "name": "Target",
-      "kind": "Class"
-    },
-    {
-      "name": "Dependency",
-      "kind": "Class"
+      "name": "Sample",
+      "nodes": [
+        {
+          "name": "Dependency",
+          "kind": "Class"
+        },
+        {
+          "name": "Target",
+          "kind": "Class"
+        }
+      ]
     }
   ],
   "edges": [
