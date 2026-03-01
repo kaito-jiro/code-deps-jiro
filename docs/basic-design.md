@@ -28,6 +28,7 @@ C#/.NET プロジェクトの依存関係を解析し、CLI で可視化する�
 ```
 CodeDepsJiro ./MyProject.csproj
 CodeDepsJiro ./src --format json --exclude *Tests* --filter ns:*UI*
+CodeDepsJiro ./src --rules ./rules.json
 ```
 
 ### 出力例（Plain）
@@ -44,6 +45,26 @@ Service -> IRepository
   ]
 }
 ```
+
+### ルールファイル（概要）
+ルールファイルは JSON で、`--rules <file>` で指定する。指定しない場合はルール判定を行わない。
+
+```json
+{
+  "layers": [
+    { "name": "Domain", "patterns": ["MyApp.Domain.*"] },
+    { "name": "Application", "patterns": ["MyApp.Application.*"] }
+  ],
+  "violations": [
+    { "from": "Application", "to": "Infrastructure" }
+  ]
+}
+```
+
+期待仕様:
+- `layers[].name` と `violations[].from/to` は必須
+- `layers[].patterns` は空配列可
+- 不正な JSON や必須項目の欠落はエラー扱いで処理を中断する
 
 ## 6. 解析パイプライン（責務分割）
 - `ProjectLoader`: 入力解決、`.cs` ファイル列挙

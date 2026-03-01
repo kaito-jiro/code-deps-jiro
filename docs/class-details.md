@@ -90,6 +90,17 @@
 - 仕様:
   - 名前空間とレイヤーパターンを照合
 
+### RuleSetLoader
+- 役割: ルールファイル（JSON）を読み込み `RuleSet` を構築
+- 入力: ルールファイルパス
+- 出力: `RuleSet`
+- 仕様:
+  - JSON 不正/必須項目欠落/空ファイルは `ArgumentException`
+  - `layers[].name` と `violations[].from/to` を必須とする
+
+### RuleSetDto / LayerRuleDto / ViolationRuleDto
+- 役割: ルールファイル読み込み用 DTO
+
 ## Exporter
 
 ### PlainTextExporter
