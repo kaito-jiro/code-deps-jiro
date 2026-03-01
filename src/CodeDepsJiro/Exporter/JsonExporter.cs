@@ -17,11 +17,20 @@ public sealed class JsonExporter : IExporter
     {
         var payload = new
         {
-            nodes = graph.Nodes.Select(node => new
-            {
-                name = node.Name,
-                kind = node.Kind.ToString(),
-            }),
+            namespaces = graph.Nodes
+                .GroupBy(node => node.Namespace)
+                .OrderBy(group => group.Key)
+                .Select(group => new
+                {
+                    name = group.Key,
+                    nodes = group
+                        .OrderBy(node => node.Name)
+                        .Select(node => new
+                        {
+                            name = node.Name,
+                            kind = node.Kind.ToString(),
+                        }),
+                }),
             edges = graph.Edges.Select(edge => new
             {
                 from = edge.From.Name,
