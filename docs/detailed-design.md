@@ -57,6 +57,7 @@ flowchart TD
 ### Exporter
 - 役割: 依存情報の出力（Plain/JSON/CSV）
 - 出力: 文字列
+- ルール違反は JSON の `violations` にのみ含める
 
 ## 4. データモデル
 
