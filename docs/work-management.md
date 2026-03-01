@@ -20,6 +20,13 @@
 - 実装を変更したら関連する `docs/` も更新する
 - `README.md` は概要・使い方・ライセンスのみ簡潔に保つ
 
-## 5. 定期レビュー
+## 5. PR 前チェックリスト
+- `docs/project.md` と `docs/roadmap.md` に変更内容が反映されている
+- `README.md` / `README.ja.md` とソースの整合が取れている
+- 新規/変更した機能に対応するテストがある（または未作成理由を記載）
+- `dotnet test src/tests/CodeDepsJiro.Tests/CodeDepsJiro.Tests.csproj` を実行済み
+- 追加した出力例・スナップショットが最新の仕様に一致している
+
+## 6. 定期レビュー
 - 週単位で `docs/roadmap.md` の「次の作業」を更新
 - 仕様変更があれば `docs/detailed-design.md` に反映
