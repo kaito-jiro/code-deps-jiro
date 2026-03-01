@@ -67,29 +67,22 @@ public sealed class ProjectLoader : IProjectLoader
         var document = XDocument.Load(projectPath);
         var root = document.Root ?? throw new ArgumentException("Invalid project file.");
 
-        var includePaths = ResolveProjectIncludes(root, projectDir);
-        var removePaths = ResolveProjectRemoves(root, projectDir);
+        var includePaths = ResolveProjectIncludes(root);
+        var removePaths = ResolveProjectRemoves(root);
         var projectRefs = ResolveProjectReferences(root, projectDir);
 
         var files = new HashSet<string>(defaultFiles, StringComparer.OrdinalIgnoreCase);
         foreach (var include in includePaths)
         {
-            if (File.Exists(include))
+            foreach (var file in ExpandInclude(projectDir, include, excludePattern))
             {
-                files.Add(include);
-            }
-            else if (Directory.Exists(include))
-            {
-                foreach (var file in EnumerateCsFiles(include, excludePattern))
-                {
-                    files.Add(file);
-                }
+                files.Add(file);
             }
         }
 
         foreach (var remove in removePaths)
         {
-            files.RemoveWhere(path => MatchesPath(remove, path));
+            files.RemoveWhere(path => MatchesRemovePattern(projectDir, remove, path));
         }
 
         foreach (var reference in projectRefs)
@@ -107,13 +100,12 @@ public sealed class ProjectLoader : IProjectLoader
     /// Compile Include を解決する。
     /// </summary>
     /// <param name="root">プロジェクト XML。</param>
-    /// <param name="projectDir">プロジェクトのディレクトリ。</param>
     /// <returns>インクルード対象パス一覧。</returns>
-    private static IReadOnlyList<string> ResolveProjectIncludes(XElement root, string projectDir)
+    private static IReadOnlyList<string> ResolveProjectIncludes(XElement root)
     {
         return root.Descendants()
             .Where(node => node.Name.LocalName == "Compile" && node.Attribute("Include") != null)
-            .Select(node => ResolvePath(projectDir, node.Attribute("Include")!.Value))
+            .SelectMany(node => SplitItemValues(node.Attribute("Include")!.Value))
             .ToList();
     }
 
@@ -121,13 +113,12 @@ public sealed class ProjectLoader : IProjectLoader
     /// Compile Remove を解決する。
     /// </summary>
     /// <param name="root">プロジェクト XML。</param>
-    /// <param name="projectDir">プロジェクトのディレクトリ。</param>
     /// <returns>除外対象パス一覧。</returns>
-    private static IReadOnlyList<string> ResolveProjectRemoves(XElement root, string projectDir)
+    private static IReadOnlyList<string> ResolveProjectRemoves(XElement root)
     {
         return root.Descendants()
             .Where(node => node.Name.LocalName == "Compile" && node.Attribute("Remove") != null)
-            .Select(node => ResolvePath(projectDir, node.Attribute("Remove")!.Value))
+            .SelectMany(node => SplitItemValues(node.Attribute("Remove")!.Value))
             .ToList();
     }
 
@@ -154,7 +145,66 @@ public sealed class ProjectLoader : IProjectLoader
     /// <returns>絶対パス。</returns>
     private static string ResolvePath(string projectDir, string path)
     {
-        return Path.GetFullPath(Path.Combine(projectDir, path));
+        var normalized = path.Replace('\\', Path.DirectorySeparatorChar);
+        return Path.GetFullPath(Path.Combine(projectDir, normalized));
+    }
+
+    /// <summary>
+    /// Compile Include の値を展開してファイル一覧を取得する。
+    /// </summary>
+    /// <param name="projectDir">プロジェクトのディレクトリ。</param>
+    /// <param name="include">Include パターン。</param>
+    /// <param name="excludePattern">除外パターン。</param>
+    /// <returns>対象ファイル一覧。</returns>
+    private static IEnumerable<string> ExpandInclude(string projectDir, string include, string? excludePattern)
+    {
+        if (string.IsNullOrWhiteSpace(include))
+        {
+            yield break;
+        }
+
+        if (ContainsWildcard(include))
+        {
+            foreach (var file in EnumerateMatchingFiles(projectDir, include, excludePattern))
+            {
+                yield return file;
+            }
+
+            yield break;
+        }
+
+        var path = ResolvePath(projectDir, include);
+        if (File.Exists(path))
+        {
+            yield return path;
+            yield break;
+        }
+
+        if (Directory.Exists(path))
+        {
+            foreach (var file in EnumerateCsFiles(path, excludePattern))
+            {
+                yield return file;
+            }
+        }
+    }
+
+    /// <summary>
+    /// ワイルドカードを含む Include から対象ファイルを列挙する。
+    /// </summary>
+    /// <param name="projectDir">プロジェクトのディレクトリ。</param>
+    /// <param name="pattern">検索パターン。</param>
+    /// <param name="excludePattern">除外パターン。</param>
+    /// <returns>一致したファイル一覧。</returns>
+    private static IReadOnlyList<string> EnumerateMatchingFiles(string projectDir, string pattern, string? excludePattern)
+    {
+        var files = Directory.EnumerateFiles(projectDir, "*.cs", SearchOption.AllDirectories)
+            .Where(path => !IsInIgnoredDirectory(path))
+            .Where(path => !IsExcluded(path, projectDir, excludePattern))
+            .Where(path => MatchesIncludePattern(projectDir, pattern, path))
+            .ToList();
+
+        return files;
     }
 
     /// <summary>
@@ -208,17 +258,85 @@ public sealed class ProjectLoader : IProjectLoader
     /// <param name="patternPath">除外指定のパス。</param>
     /// <param name="actualPath">実ファイルのパス。</param>
     /// <returns>一致する場合 true。</returns>
-    private static bool MatchesPath(string patternPath, string actualPath)
+    private static bool MatchesRemovePattern(string projectDir, string patternPath, string actualPath)
     {
-        var normalizedPattern = patternPath.Replace('\\', '/');
-        var normalizedActual = actualPath.Replace('\\', '/');
+        var normalizedActual = NormalizePath(actualPath);
+        var normalizedPattern = NormalizePath(patternPath);
 
-        if (normalizedPattern.Contains('*') || normalizedPattern.Contains('?'))
+        if (Path.IsPathRooted(patternPath))
         {
-            return WildcardMatch(normalizedPattern, normalizedActual);
+            var fullPattern = NormalizePath(Path.GetFullPath(patternPath));
+            return ContainsWildcard(fullPattern)
+                ? WildcardMatch(fullPattern, normalizedActual)
+                : string.Equals(fullPattern, normalizedActual, StringComparison.OrdinalIgnoreCase);
         }
 
-        return string.Equals(normalizedPattern, normalizedActual, StringComparison.OrdinalIgnoreCase);
+        var relative = NormalizePath(Path.GetRelativePath(projectDir, actualPath));
+        if (ContainsWildcard(normalizedPattern))
+        {
+            return WildcardMatch(normalizedPattern, relative) ||
+                WildcardMatch(normalizedPattern, Path.GetFileName(actualPath));
+        }
+
+        if (string.Equals(normalizedPattern, relative, StringComparison.OrdinalIgnoreCase))
+        {
+            return true;
+        }
+
+        var resolved = NormalizePath(ResolvePath(projectDir, patternPath));
+        return string.Equals(resolved, normalizedActual, StringComparison.OrdinalIgnoreCase);
+    }
+
+    /// <summary>
+    /// Include パターンと実ファイルの一致を判定する。
+    /// </summary>
+    /// <param name="projectDir">プロジェクトのディレクトリ。</param>
+    /// <param name="pattern">Include パターン。</param>
+    /// <param name="actualPath">実ファイルのパス。</param>
+    /// <returns>一致する場合 true。</returns>
+    private static bool MatchesIncludePattern(string projectDir, string pattern, string actualPath)
+    {
+        var normalizedActual = NormalizePath(actualPath);
+        var normalizedPattern = NormalizePath(pattern);
+
+        if (Path.IsPathRooted(pattern))
+        {
+            var fullPattern = NormalizePath(Path.GetFullPath(pattern));
+            return WildcardMatch(fullPattern, normalizedActual);
+        }
+
+        var relative = NormalizePath(Path.GetRelativePath(projectDir, actualPath));
+        return WildcardMatch(normalizedPattern, relative);
+    }
+
+    /// <summary>
+    /// ワイルドカードを含むか判定する。
+    /// </summary>
+    /// <param name="pattern">パターン。</param>
+    /// <returns>含む場合 true。</returns>
+    private static bool ContainsWildcard(string pattern)
+    {
+        return pattern.Contains('*') || pattern.Contains('?');
+    }
+
+    /// <summary>
+    /// パスを正規化する。
+    /// </summary>
+    /// <param name="path">対象パス。</param>
+    /// <returns>正規化済みパス。</returns>
+    private static string NormalizePath(string path)
+    {
+        return path.Replace('\\', '/');
+    }
+
+    /// <summary>
+    /// セミコロン区切りの項目を分割する。
+    /// </summary>
+    /// <param name="value">値。</param>
+    /// <returns>分割結果。</returns>
+    private static IEnumerable<string> SplitItemValues(string value)
+    {
+        return value.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
     }
 
     /// <summary>

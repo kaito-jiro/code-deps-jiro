@@ -8,6 +8,7 @@ C#/.NET プロジェクトの依存関係を解析し、CLI で可視化する�
 - 解析対象は `.cs` ファイル
 - Roslyn（`Microsoft.CodeAnalysis.CSharp`）で構文解析と型解決を行う
 - CLI で完結し、外部サービスは不要
+- `.csproj` 入力時は `Compile Include/Remove` と `ProjectReference` を解決する
 
 ## 3. スコープ
 - クラス/インターフェース/抽象クラスの依存抽出
@@ -74,6 +75,11 @@ Service -> IRepository
 - `GraphBuilder`: ノード/エッジ化、循環検出
 - `RuleEvaluator`: ルールファイル適用と違反判定
 - `Exporter`: Plain/JSON/CSV 変換
+
+### `.csproj` 解決方針（概要）
+- `Compile` の `Include/Remove` に従い、対象 `.cs` を確定する
+- `ProjectReference` は参照先 `.csproj` を辿り、必要に応じてソースを追加する
+- 参照先の探索は循環参照を防ぐために訪問済みを管理する
 
 ## 7. データモデル（概要）
 - `Node`: `Id`, `Name`, `Namespace`, `Kind`
