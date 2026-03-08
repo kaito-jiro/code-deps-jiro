@@ -28,26 +28,7 @@ public sealed class OutputSnapshotTests
         }
     }
 
-    [Fact]
-    public void CsvOutput_MatchesSnapshot()
-    {
-        var filePath = WriteTestFile(GetSampleCode());
-
-        try
-        {
-            var output = GenerateOutput(filePath, new CsvExporter());
-            var normalized = NormalizeNewlines(output);
-            var expected = NormalizeNewlines(ReadSnapshot("dependencies.csv"));
-
-            Assert.Equal(expected, normalized);
-        }
-        finally
-        {
-            DeleteTestFile(filePath);
-        }
-    }
-
-    private static string GenerateOutput(string filePath, IExporter exporter)
+    private static string GenerateOutput(string filePath, JsonExporter exporter)
     {
         var syntaxAnalyzer = new SyntaxAnalyzerType();
         var semanticAnalyzer = new SemanticAnalyzerType();

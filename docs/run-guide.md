@@ -54,7 +54,7 @@ dotnet src/CodeDepsJiro/bin/Debug/net10.0/CodeDepsJiro.dll ./path/to/MyProject
 ```
 
 ## 6. オプション
-- `--format <plain|json|csv>`: 出力形式
+- `--format <json>`: 出力形式（省略時も JSON）
 - `--output <file>`: 出力ファイル（未指定時は標準出力）
 - `--filter <pattern>`: 名前空間フィルタ
 - `--rules <file>`: ルールファイル指定
@@ -69,15 +69,23 @@ dotnet src/CodeDepsJiro/bin/Debug/net10.0/CodeDepsJiro.dll ./path/to/MyProject
 ./src/CodeDepsJiro/bin/Release/net10.0/linux-x64/publish/CodeDepsJiro ../OtherProject --exclude *Tests*
 ```
 
-```
-dotnet src/CodeDepsJiro/bin/Debug/net10.0/CodeDepsJiro.dll ./path/to/MyProject --format csv --output out/code-deps-jiro.csv
-```
-
 ## 7. 出力例
 ### 7.1 標準出力（`--output` 未指定）
-```
-MyApp.Services.UserService -> MyApp.Data.UserRepository
-MyApp.Controllers.UserController -> MyApp.Services.UserService
+```json
+{
+    "namespaces": [
+        {
+            "name": "MyApp.Services",
+            "nodes": [
+                { "name": "UserService", "kind": "Class" }
+            ]
+        }
+    ],
+    "edges": [
+        { "from": "UserService", "to": "UserRepository", "relationType": "Field" }
+    ],
+    "violations": []
+}
 ```
 
 ### 7.2 ファイル出力（`--output` 指定）

@@ -38,7 +38,7 @@ README は概要と最小限の使い方に絞り、詳細手順は `docs/run-gu
 新規テストを追加したら `docs/workflow/testing.md` の表も更新します。
 
 ## Commit & Pull Request Guidelines
-このリポジトリにはまだ確立したコミット規約がありません。暫定として、命令形で簡潔に（例: `Add JSON exporter`）。PR には目的の説明、関連 Issue、出力例（Plain/JSON/CSV のスニペット）を含めてください。
+このリポジトリにはまだ確立したコミット規約がありません。暫定として、命令形で簡潔に（例: `Add JSON exporter`）。PR には目的の説明、関連 Issue、出力例（JSON のスニペット）を含めてください。
 大きな仕様変更は `docs/project.md` と `docs/design/detailed-design.md` を同時に更新します。
 Issue を作成する際は「目的 / 仕様 / 完了条件 / 受け入れ」を含めます。
 例:

@@ -32,13 +32,8 @@ try
         : RuleSetLoader.LoadFromFile(options.RulesFile);
     var violations = ruleEvaluator.Evaluate(graph, ruleSet);
 
-    // 出力形式に応じてエクスポーターを切り替え
-    IExporter exporter = options.OutputFormat switch
-    {
-        OutputFormat.Json => new JsonExporter(),
-        OutputFormat.Csv => new CsvExporter(),
-        _ => new PlainTextExporter(),
-    };
+    // 出力は JSON のみ対応
+    IExporter exporter = new JsonExporter();
     var output = exporter.Export(graph, violations);
 
     if (string.IsNullOrWhiteSpace(options.OutputPath))
@@ -61,6 +56,6 @@ try
 catch (ArgumentException ex)
 {
     Console.Error.WriteLine(ex.Message);
-    Console.Error.WriteLine("Usage: CodeDepsJiro <path> [--format <plain|json|csv>] [--output <file>] [--filter <pattern>] [--rules <file>] [--exclude <pattern>]");
+    Console.Error.WriteLine("Usage: CodeDepsJiro <path> [--format <json>] [--output <file>] [--filter <pattern>] [--rules <file>] [--exclude <pattern>]");
     Environment.Exit(1);
 }

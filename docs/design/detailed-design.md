@@ -2,7 +2,7 @@
 
 ## 1. コンセプト
 このツールは「.NET/C# の依存構造を CLI で短時間に把握できる」ことを目的に、
-静的解析（Roslyn）で正確な依存関係を抽出し、Plain/JSON/CSV で出力する。
+静的解析（Roslyn）で正確な依存関係を抽出し、JSON で出力する。
 
 ## 2. アーキテクチャ概要
 単一責務のパイプライン構成で、入力から出力までを直列に処理する。
@@ -59,7 +59,7 @@ flowchart TD
 - 出力: `RuleSet`
 
 ### Exporter
-- 役割: 依存情報の出力（Plain/JSON/CSV）
+- 役割: 依存情報の出力（JSON）
 - 出力: 文字列
 - ルール違反は JSON の `violations` にのみ含める
 - JSON の `namespaces` にクラスノードをまとめる
@@ -92,7 +92,7 @@ CodeDepsJiro <path> [options]
 ```
 
 ### オプション
-- `--format <plain|json|csv>`: 出力形式
+- `--format <json>`: 出力形式（省略時も JSON）
 - `--output <file>`: 出力ファイル
 - `--filter <pattern>`: 名前空間フィルタ（例: `ns:*UI*`）
 - `--rules <file>`: ルールファイル指定
@@ -138,8 +138,7 @@ flowchart TD
 
 ## 8. 受け入れ基準（MVP）
 - `.csproj` またはフォルダを入力できる
-- 依存関係が Plain で出力される
-- JSON/CSV を出力できる
+- 依存関係を JSON で出力できる
 - 解析失敗時に警告が出る
 
 ## 9. 実装指針

@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <None Include="Snapshots\*.json" CopyToOutputDirectory="PreserveNewest" />
-    <None Include="Snapshots\*.csv" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

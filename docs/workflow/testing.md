@@ -8,7 +8,7 @@
 ## 現在のテスト
 - フレームワーク: xUnit
 - プロジェクト: `src/tests/CodeDepsJiro.Tests/CodeDepsJiro.Tests.csproj`
-- スナップショット: `src/tests/CodeDepsJiro.Tests/Snapshots/` 配下の JSON/CSV
+- スナップショット: `src/tests/CodeDepsJiro.Tests/Snapshots/` 配下の JSON
 
 ## 実行方法
 ```
@@ -26,7 +26,7 @@ dotnet test src/tests/CodeDepsJiro.Tests/CodeDepsJiro.Tests.csproj
 | --- | --- | --- | --- |
 | `DependencyCollectorTests` | 単体/結合の中間 | `SemanticAnalyzer`, `DependencyCollector` | 依存種別（継承/実装/フィールド/プロパティ/引数/戻り値/new）の抽出 |
 | `GraphBuilderTests` | 単体 | `GraphBuilder` | ノード重複排除 |
-| `OutputSnapshotTests` | 結合/システム寄り | `SyntaxAnalyzer`〜`Exporter` | JSON/CSV 出力のスナップショット一致 |
+| `OutputSnapshotTests` | 結合/システム寄り | `SyntaxAnalyzer`〜`Exporter` | JSON 出力のスナップショット一致 |
 | `RuleSetLoaderTests` | 単体 | `RuleSetLoader` | ルールファイルの読み込み/入力バリデーション |
 | `RuleEvaluatorTests` | 単体 | `RuleEvaluator` | レイヤールール違反の検出 |
 | `ProjectLoaderCsprojTests` | 単体/結合の中間 | `ProjectLoader` | `Compile Include/Remove` と `ProjectReference` の解決 |
@@ -35,7 +35,7 @@ dotnet test src/tests/CodeDepsJiro.Tests/CodeDepsJiro.Tests.csproj
 - `DependencyCollectorTests`（単体/結合の中間）: 単一ファイルに定義した `Target` が `Base`/`IService`/`Dependency`/`Other` に依存することを確認  
   - Roslyn の `SemanticAnalyzer` と `DependencyCollector` を組み合わせているため、純粋な単体ではなく「軽い結合テスト」に近い
 - `GraphBuilderTests`（単体）: 同一 `Id` のノードが複数エッジに出ても `Nodes` が重複しないことを確認
-- `OutputSnapshotTests`（結合/システム寄り）: `dependencies.json` と `dependencies.csv` に対して出力が一致することを確認  
+- `OutputSnapshotTests`（結合/システム寄り）: `dependencies.json` に対して出力が一致することを確認  
   - `SyntaxAnalyzer` → `SemanticAnalyzer` → `DependencyCollector` → `GraphBuilder` → `Exporter` の一連を通すため、結合〜システム寄りの検証
 - `RuleSetLoaderTests`（単体）: ルールファイルの正常系読み込みと必須項目欠落/不正 JSON の例外を確認
 - `RuleEvaluatorTests`（単体）: レイヤー一致/不一致と違反ルール適用の判定を確認
@@ -44,5 +44,5 @@ dotnet test src/tests/CodeDepsJiro.Tests/CodeDepsJiro.Tests.csproj
 ## 作成検討中のテスト
 | テスト名 | 種別 | 対象 | 目的 | 備考 |
 | --- | --- | --- | --- | --- |
-| `CliOptionsIntegrationTests` | 結合 | `ArgumentParser`〜`Exporter` | `--format/--output/--exclude` の組み合わせ動作 | CLI 仕様の安定化待ち |
+| `CliOptionsIntegrationTests` | 結合 | `ArgumentParser`〜`Exporter` | `--format json/--output/--exclude` の組み合わせ動作 | CLI 仕様の安定化待ち |
 | `SemanticAnalyzerReferenceTests` | 単体/結合の中間 | `SemanticAnalyzer` | 参照解決が必要な型の解析可否 | 参照解決の対象範囲が未定 |

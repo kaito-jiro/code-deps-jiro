@@ -52,7 +52,7 @@ public static class ArgumentParser
     /// <summary>
     /// 出力形式の文字列を列挙値に変換します。
     /// </summary>
-    /// <param name="value">出力形式（plain/json/csv）。</param>
+    /// <param name="value">出力形式（json）。</param>
     /// <returns>出力形式。</returns>
     private static OutputFormat ParseFormat(string? value)
     {
@@ -63,9 +63,7 @@ public static class ArgumentParser
 
         return value.Trim().ToLowerInvariant() switch
         {
-            "plain" => OutputFormat.Plain,
             "json" => OutputFormat.Json,
-            "csv" => OutputFormat.Csv,
             _ => throw new ArgumentException($"Unknown format: {value}"),
         };
     }
