@@ -56,6 +56,6 @@ try
 catch (ArgumentException ex)
 {
     Console.Error.WriteLine(ex.Message);
-    Console.Error.WriteLine("Usage: CodeDepsJiro <path> [--format <json>] [--output <file>] [--filter <pattern>] [--rules <file>] [--exclude <pattern>]");
+    Console.Error.WriteLine("Usage: CodeDepsJiro <path> [--output <file>] [--filter <pattern>] [--rules <file>] [--exclude <pattern>]");
     Environment.Exit(1);
 }
