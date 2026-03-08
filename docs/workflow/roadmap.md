@@ -12,7 +12,7 @@
 - 入出力仕様の確定
 - 依存抽出対象と責務分割の方針確定
 - CLI オプション方針の確定
-- 出力形式の最小要件（Plain/JSON/CSV）
+- 出力形式の最小要件（JSON）
 
 成果物:
 - 基本設計書: `docs/design/basic-design.md`
@@ -37,7 +37,7 @@
 - CLI 引数パース（入力パス、オプション）
 - 解析パイプラインの接続（入力→依存抽出→出力）
 - `.csproj` 解析（Compile Include/Remove, ProjectReference 対応）
-- Plain/JSON/CSV 出力
+- JSON 出力
 - ルール評価の初期実装
 
 未完了:
@@ -52,7 +52,7 @@
 目的は挙動の保証と回帰防止です。
 - テストプロジェクト追加（xUnit）
 - 単体テスト: `DependencyCollector`, `GraphBuilder`
-- 出力スナップショットテスト（JSON/CSV）
+- 出力スナップショットテスト（JSON）
 - ルール読み込み/違反検出のテスト
 - `.csproj` 解決テスト（Compile Include/Remove, ProjectReference）
 

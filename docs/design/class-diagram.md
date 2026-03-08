@@ -6,7 +6,6 @@ classDiagram
 
     class Options {
         +string InputPath
-        +OutputFormat OutputFormat
         +string OutputPath
         +string FilterPattern
         +string RulesFile
@@ -49,15 +48,7 @@ classDiagram
     class LayerRuleDto
     class ViolationRuleDto
 
-    class PlainTextExporter {
-        +string Export(Graph graph, IReadOnlyList~RuleViolation~ violations)
-    }
-
     class JsonExporter {
-        +string Export(Graph graph, IReadOnlyList~RuleViolation~ violations)
-    }
-
-    class CsvExporter {
         +string Export(Graph graph, IReadOnlyList~RuleViolation~ violations)
     }
 
@@ -81,9 +72,7 @@ classDiagram
     Program --> GraphBuilder
     Program --> RuleEvaluator
     Program --> RuleSetLoader
-    Program --> PlainTextExporter
     Program --> JsonExporter
-    Program --> CsvExporter
 
     ArgumentParser --> Options
 
@@ -109,9 +98,7 @@ classDiagram
     RuleSetDto --> LayerRuleDto
     RuleSetDto --> ViolationRuleDto
 
-    PlainTextExporter --> Graph
     JsonExporter --> Graph
-    CsvExporter --> Graph
 ```
 
 ## CLI レイヤ
@@ -124,7 +111,6 @@ classDiagram
     }
     class Options {
         +string InputPath
-        +OutputFormat OutputFormat
         +string OutputPath
         +string FilterPattern
         +string RulesFile
@@ -172,24 +158,14 @@ classDiagram
 
 ```mermaid
 classDiagram
-    class PlainTextExporter {
-        +string Export(Graph graph, IReadOnlyList~RuleViolation~ violations)
-    }
     class JsonExporter {
-        +string Export(Graph graph, IReadOnlyList~RuleViolation~ violations)
-    }
-    class CsvExporter {
         +string Export(Graph graph, IReadOnlyList~RuleViolation~ violations)
     }
     class Graph
     class RuleViolation
 
-    PlainTextExporter --> Graph
-    PlainTextExporter --> RuleViolation
     JsonExporter --> Graph
     JsonExporter --> RuleViolation
-    CsvExporter --> Graph
-    CsvExporter --> RuleViolation
 ```
 
 ## Models レイヤ

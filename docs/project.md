@@ -23,13 +23,7 @@
 - 特定パターン（例：レイヤー境界越え）のルール違反検出
 
 ### 2.2 出力
-
-#### Plain Text
-
-Controller -> Service  
-Service -> IRepository  
-
-#### JSON / CSV
+#### JSON
 - 依存エッジを機械可読な形式で出力
 - 大規模プロジェクトでの後処理・集計に利用
 - JSON は `namespaces` 配下にクラスノードをまとめる
@@ -41,7 +35,7 @@ CodeDepsJiro ./path/to/MyProject/MyProject.csproj
 
 ### オプション例
 
-- 主なオプション: `--format`, `--output`, `--filter`, `--rules`, `--exclude`
+- 主なオプション: `--output`, `--filter`, `--rules`, `--exclude`
 - 詳細な使い方と実行例は `docs/run-guide.md` を参照
 
 ## 4. 入力仕様
@@ -98,7 +92,7 @@ code-deps-jiro/
 - レイヤールール違反検出
 
 #### Exporter
-- Plain / JSON / CSV 形式で出力
+- JSON 形式で出力
 
 
 ## 6. 技術詳細
@@ -155,7 +149,7 @@ MyService -> IUserRepository
 ## 9. 成功の指標
 
 - クラス依存グラフが出力できる
-- JSON/CSV で機械処理できる
+- JSON で機械処理できる
 - 循環依存が検出できる
 - ルール違反検出ができる
 

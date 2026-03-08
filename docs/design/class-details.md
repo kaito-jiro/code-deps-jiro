@@ -6,7 +6,6 @@
 - 役割: CLI 引数の結果を保持する DTO
 - 主なプロパティ:
   - `InputPath`: 解析対象のパス
-  - `OutputFormat`: 出力形式（Plain/JSON/CSV）
   - `OutputPath`: 出力先ファイル（未指定時は標準出力）
   - `FilterPattern`: 名前空間フィルタ
   - `RulesFile`: ルールファイルパス
@@ -103,21 +102,11 @@
 
 ## Exporter
 
-### PlainTextExporter
-- 役割: 依存関係を `A -> B` 形式で出力
-- 入力: `Graph`, `RuleViolation` 一覧
-- 出力: 文字列
-
 ### JsonExporter
 - 役割: 依存関係を JSON 形式で出力
 - 入力: `Graph`, `RuleViolation` 一覧
 - 出力: 文字列
 - 出力フォーマットの詳細は `docs/design/detailed-design.md` を参照
-
-### CsvExporter
-- 役割: 依存関係を CSV 形式で出力
-- 入力: `Graph`, `RuleViolation` 一覧
-- 出力: 文字列
 
 ## Models
 

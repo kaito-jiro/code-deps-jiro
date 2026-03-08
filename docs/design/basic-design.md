@@ -15,7 +15,7 @@ C#/.NET プロジェクトの依存関係を解析し、CLI で可視化する�
 - 名前空間依存の集計
 - 循環依存検出
 - ルールファイルによるレイヤー依存の検査
-- 出力は Plain/JSON/CSV
+- 出力は JSON
 
 ## 4. 非スコープ（初期段階では扱わない）
 - UI アプリや Web UI
@@ -28,14 +28,8 @@ C#/.NET プロジェクトの依存関係を解析し、CLI で可視化する�
 ### 入力例
 ```
 CodeDepsJiro ./MyProject.csproj
-CodeDepsJiro ./src --format json --exclude *Tests* --filter ns:*UI*
+CodeDepsJiro ./src --exclude *Tests* --filter ns:*UI*
 CodeDepsJiro ./src --rules ./rules.json
-```
-
-### 出力例（Plain）
-```
-Controller -> Service
-Service -> IRepository
 ```
 
 ### 出力例（JSON 抜粋）
@@ -71,7 +65,7 @@ Service -> IRepository
 - `DependencyCollector`: 依存抽出ルール適用
 - `GraphBuilder`: ノード/エッジ化、循環検出
 - `RuleEvaluator`: ルールファイル適用と違反判定
-- `Exporter`: Plain/JSON/CSV 変換
+- `Exporter`: JSON 変換
 
 ### `.csproj` 解決方針（概要）
 - `Compile` の `Include/Remove` に従い、対象 `.cs` を確定する
