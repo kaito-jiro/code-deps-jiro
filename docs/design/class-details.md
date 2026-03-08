@@ -6,7 +6,6 @@
 - 役割: CLI 引数の結果を保持する DTO
 - 主なプロパティ:
   - `InputPath`: 解析対象のパス
-  - `OutputFormat`: 出力形式（JSON）
   - `OutputPath`: 出力先ファイル（未指定時は標準出力）
   - `FilterPattern`: 名前空間フィルタ
   - `RulesFile`: ルールファイルパス

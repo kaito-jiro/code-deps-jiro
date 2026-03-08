@@ -23,8 +23,8 @@ dotnet src/CodeDepsJiro/bin/Debug/net10.0/CodeDepsJiro.dll ./path/to/MyProject/M
 
 ### Output options
 ```
-./src/CodeDepsJiro/bin/Release/net10.0/linux-x64/publish/CodeDepsJiro ./path/to/MyProject/MyProject.csproj --format json --output out/code-deps-jiro.json
-./src/CodeDepsJiro/bin/Release/net10.0/linux-x64/publish/CodeDepsJiro ./path/to/MyProject/MyProject.csproj --rules rules.json --format json --output out/code-deps-jiro.json
+./src/CodeDepsJiro/bin/Release/net10.0/linux-x64/publish/CodeDepsJiro ./path/to/MyProject/MyProject.csproj --output out/code-deps-jiro.json
+./src/CodeDepsJiro/bin/Release/net10.0/linux-x64/publish/CodeDepsJiro ./path/to/MyProject/MyProject.csproj --rules rules.json --output out/code-deps-jiro.json
 ```
 
 If `--output` is not specified, results are written to standard output.

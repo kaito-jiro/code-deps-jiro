@@ -6,7 +6,6 @@ classDiagram
 
     class Options {
         +string InputPath
-        +OutputFormat OutputFormat
         +string OutputPath
         +string FilterPattern
         +string RulesFile
@@ -112,7 +111,6 @@ classDiagram
     }
     class Options {
         +string InputPath
-        +OutputFormat OutputFormat
         +string OutputPath
         +string FilterPattern
         +string RulesFile

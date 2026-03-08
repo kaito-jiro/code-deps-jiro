@@ -28,7 +28,7 @@ C#/.NET プロジェクトの依存関係を解析し、CLI で可視化する�
 ### 入力例
 ```
 CodeDepsJiro ./MyProject.csproj
-CodeDepsJiro ./src --format json --exclude *Tests* --filter ns:*UI*
+CodeDepsJiro ./src --exclude *Tests* --filter ns:*UI*
 CodeDepsJiro ./src --rules ./rules.json
 ```
 

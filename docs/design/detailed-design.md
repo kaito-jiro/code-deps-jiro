@@ -92,7 +92,6 @@ CodeDepsJiro <path> [options]
 ```
 
 ### オプション
-- `--format <json>`: 出力形式（省略時も JSON）
 - `--output <file>`: 出力ファイル
 - `--filter <pattern>`: 名前空間フィルタ（例: `ns:*UI*`）
 - `--rules <file>`: ルールファイル指定

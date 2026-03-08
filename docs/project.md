@@ -35,7 +35,7 @@ CodeDepsJiro ./path/to/MyProject/MyProject.csproj
 
 ### オプション例
 
-- 主なオプション: `--format`, `--output`, `--filter`, `--rules`, `--exclude`
+- 主なオプション: `--output`, `--filter`, `--rules`, `--exclude`
 - 詳細な使い方と実行例は `docs/run-guide.md` を参照
 
 ## 4. 入力仕様

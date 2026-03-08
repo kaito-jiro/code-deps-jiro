@@ -44,5 +44,5 @@ dotnet test src/tests/CodeDepsJiro.Tests/CodeDepsJiro.Tests.csproj
 ## 作成検討中のテスト
 | テスト名 | 種別 | 対象 | 目的 | 備考 |
 | --- | --- | --- | --- | --- |
-| `CliOptionsIntegrationTests` | 結合 | `ArgumentParser`〜`Exporter` | `--format json/--output/--exclude` の組み合わせ動作 | CLI 仕様の安定化待ち |
+| `CliOptionsIntegrationTests` | 結合 | `ArgumentParser`〜`Exporter` | `--output/--exclude` の組み合わせ動作 | CLI 仕様の安定化待ち |
 | `SemanticAnalyzerReferenceTests` | 単体/結合の中間 | `SemanticAnalyzer` | 参照解決が必要な型の解析可否 | 参照解決の対象範囲が未定 |
