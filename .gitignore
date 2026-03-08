@@ -5,3 +5,5 @@ obj/
 # Local dotnet CLI home and temp
 .dotnet/
 .tmp/
+
+docs/organising-docs.md

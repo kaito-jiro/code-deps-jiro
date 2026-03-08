@@ -94,4 +94,4 @@ Service -> IRepository
 
 ## 9. 成果物
 - 設計仕様書（本書）
-- 詳細設計書（`docs/detailed-design.md`）
+- 詳細設計書（`docs/design/detailed-design.md`）

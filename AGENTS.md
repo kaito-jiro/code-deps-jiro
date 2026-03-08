@@ -7,7 +7,7 @@
 現在は `src/CodeDepsJiro/` 配下に各コンポーネントの `*.cs` を配置しています。CLI 関連は `src/CodeDepsJiro/Cli/`、モデル定義は `src/CodeDepsJiro/Models/`、エントリポイントは `src/CodeDepsJiro/Program.cs` です。  
 テストは `src/tests/CodeDepsJiro.Tests/` 配下に配置しています。
 テストのスナップショットは `src/tests/CodeDepsJiro.Tests/Snapshots/` に置きます。
-設計資料は `docs/` 配下（例: `docs/project.md`, `docs/detailed-design.md`, `docs/class-diagram.md`, `docs/testing.md`）です。
+設計資料は `docs/` 配下（例: `docs/project.md`, `docs/design/detailed-design.md`, `docs/design/class-diagram.md`, `docs/workflow/testing.md`）です。
 README は概要と最小限の使い方に絞り、詳細手順は `docs/run-guide.md` に集約します。
 依存の流れは `ProjectLoader` → `SyntaxAnalyzer` → `SemanticAnalyzer` → `DependencyCollector` → `GraphBuilder` → `Exporter` を基本とし、追加の処理はこの順序に沿って差し込みます。
 
@@ -35,11 +35,11 @@ README は概要と最小限の使い方に絞り、詳細手順は `docs/run-gu
 命名規約は `*Tests.cs`、ディレクトリは `src/tests/CodeDepsJiro.Tests/` です。
 出力仕様を変えた場合はスナップショット（`Snapshots/`）を更新し、差分が意図通りか説明を残してください。
 解析対象のサンプルはテスト内で完結させ、外部リポジトリへの依存は避けます。
-新規テストを追加したら `docs/testing.md` の表も更新します。
+新規テストを追加したら `docs/workflow/testing.md` の表も更新します。
 
 ## Commit & Pull Request Guidelines
 このリポジトリにはまだ確立したコミット規約がありません。暫定として、命令形で簡潔に（例: `Add JSON exporter`）。PR には目的の説明、関連 Issue、出力例（Plain/JSON/CSV のスニペット）を含めてください。
-大きな仕様変更は `docs/project.md` と `docs/detailed-design.md` を同時に更新します。
+大きな仕様変更は `docs/project.md` と `docs/design/detailed-design.md` を同時に更新します。
 Issue を作成する際は「目的 / 仕様 / 完了条件 / 受け入れ」を含めます。
 例:
 ```

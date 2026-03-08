@@ -16,7 +16,7 @@
 - 出力形式の最小要件（Plain/JSON/CSV）
 
 成果物:
-- 基本設計書: `docs/basic-design.md`
+- 基本設計書: `docs/design/basic-design.md`
 - 主要データモデルの定義
 
 ## 2. 詳細設計（Low-Level Design）【完了】
@@ -30,9 +30,9 @@
 - `Exporter`: Plain/JSON/CSV 変換
 
 成果物:
-- 詳細設計書: `docs/detailed-design.md`
-- クラス図: `docs/class-diagram.md`
-- クラス詳細: `docs/class-details.md`
+- 詳細設計書: `docs/design/detailed-design.md`
+- クラス図: `docs/design/class-diagram.md`
+- クラス詳細: `docs/design/class-details.md`
 
 ## 3. 実装（Implementation）【進行中】
 目的は最小実行可能な CLI を完成させることです。
@@ -78,4 +78,4 @@
 - 例外・警告出力の整理
 
 ## 作業状況の管理
-- 方針は `docs/work-management.md` を参照
+- 方針は `docs/workflow/work-management.md` を参照
