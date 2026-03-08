@@ -45,5 +45,4 @@ dotnet test src/tests/CodeDepsJiro.Tests/CodeDepsJiro.Tests.csproj
 | テスト名 | 種別 | 対象 | 目的 | 備考 |
 | --- | --- | --- | --- | --- |
 | `CliOptionsIntegrationTests` | 結合 | `ArgumentParser`〜`Exporter` | `--format/--output/--exclude` の組み合わせ動作 | CLI 仕様の安定化待ち |
-| `RuleEvaluatorTests` | 単体 | `RuleEvaluator` | レイヤールール一致/不一致の検証 | ルールファイルのパースが未実装 |
 | `SemanticAnalyzerReferenceTests` | 単体/結合の中間 | `SemanticAnalyzer` | 参照解決が必要な型の解析可否 | 参照解決の対象範囲が未定 |

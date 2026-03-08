@@ -41,11 +41,8 @@ CodeDepsJiro ./path/to/MyProject/MyProject.csproj
 
 ### オプション例
 
-- --format json       : JSON形式で出力
-- --output out.json   : 出力先ファイル
-- --filter ns:*UI*    : 名前空間フィルタ
-- --rules rules.json  : 依存ルールファイル指定
-- --exclude *Tests*   : 除外パス指定
+- 主なオプション: `--format`, `--output`, `--filter`, `--rules`, `--exclude`
+- 詳細な使い方と実行例は `docs/run-guide.md` を参照
 
 ## 4. 入力仕様
 
@@ -139,14 +136,12 @@ MyService -> IUserRepository
 
 
 
-## 8. ルールファイル例
+## 8. ルールファイル（概要）
 
 ```
 {
   "layers": [
-    { "name": "Domain", "patterns": ["MyApp.Domain.*"] },
-    { "name": "Application", "patterns": ["MyApp.Application.*"] },
-    { "name": "Infrastructure", "patterns": ["MyApp.Infrastructure.*"] }
+    { "name": "Domain", "patterns": ["MyApp.Domain.*"] }
   ],
   "violations": [
     { "from": "Application", "to": "Infrastructure" }
@@ -154,7 +149,8 @@ MyService -> IUserRepository
 }
 ```
 
-ルールファイル指定時は JSON を読み込み、レイヤー違反を評価する。
+ルールファイル指定時は JSON を読み込み、レイヤー違反を評価する。  
+必須項目、バリデーション、エラー条件は `docs/design/detailed-design.md` を正本とする。
 
 ## 9. 成功の指標
 

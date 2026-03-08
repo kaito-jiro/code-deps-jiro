@@ -62,10 +62,7 @@ Service -> IRepository
 }
 ```
 
-期待仕様:
-- `layers[].name` と `violations[].from/to` は必須
-- `layers[].patterns` は空配列可
-- 不正な JSON や必須項目の欠落はエラー扱いで処理を中断する
+詳細な仕様（必須項目、バリデーション、エラー条件）は `docs/design/detailed-design.md` を正本とする。
 
 ## 6. 解析パイプライン（責務分割）
 - `ProjectLoader`: 入力解決、`.cs` ファイル列挙

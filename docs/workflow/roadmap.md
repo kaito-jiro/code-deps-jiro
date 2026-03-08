@@ -10,9 +10,8 @@
 目的は `docs/project.md` の設計概要を、実装可能な構成に落とし込むことです。
 - スコープ確定: 対象は C#/.NET プロジェクト（`.csproj` またはフォルダ）
 - 入出力仕様の確定
-- 依存抽出の対象（クラス/インターフェース/継承/メソッド等）の優先順位
-- 解析パイプラインの責務分割（`ProjectLoader`〜`Exporter`）
-- CLI オプションの確定（`--format`, `--output`, `--filter`, `--rules`, `--exclude`）
+- 依存抽出対象と責務分割の方針確定
+- CLI オプション方針の確定
 - 出力形式の最小要件（Plain/JSON/CSV）
 
 成果物:
@@ -21,13 +20,11 @@
 
 ## 2. 詳細設計（Low-Level Design）【完了】
 目的は各コンポーネントの入出力と内部処理を明確化することです。
-- `ProjectLoader`: `.csproj`/フォルダ → `.cs` 一覧
-- `SyntaxAnalyzer`: 構文木から型宣言を収集
-- `SemanticAnalyzer`: 型解決とシンボル取得
-- `DependencyCollector`: 依存抽出ルールと対象（フィールド/引数/戻り値/継承/実装/new）
-- `GraphBuilder`: ノード/エッジ生成、循環検出
-- `RuleEvaluator`: ルールファイルの読み込みと違反検出
-- `Exporter`: Plain/JSON/CSV 変換
+- パイプライン処理フロー定義
+- コンポーネント責務定義
+- データモデル定義
+- ルールファイル仕様定義
+- エラーハンドリング方針定義
 
 成果物:
 - 詳細設計書: `docs/design/detailed-design.md`
