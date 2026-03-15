@@ -3,7 +3,7 @@
 ## 現在の状況（要約）
 - 基本設計/詳細設計: 完了
 - 実装: `.csproj` 解決と JSON 出力拡張まで完了
-- テスト: 主要機能の単体テストまで完了
+- テスト: 主要機能の単体テストと CLI オプション結合テストまで完了
 - ドキュメント: 主要ドキュメントを整備済み
 
 ## 1. 基本設計（High-Level Design）【完了】
@@ -48,15 +48,13 @@
 - `dotnet build src/CodeDepsJiro/CodeDepsJiro.csproj` が通る
 - `dotnet src/CodeDepsJiro/bin/Debug/net10.0/CodeDepsJiro.dll <path>` で動作
 
-## 4. テスト（Testing）【進行中】
+## 4. テスト（Testing）【完了】
 目的は挙動の保証と回帰防止です。
 - テストプロジェクト追加（xUnit）
 - 単体テスト: `DependencyCollector`, `GraphBuilder`
 - 出力スナップショットテスト（JSON）
 - ルール読み込み/違反検出のテスト
 - `.csproj` 解決テスト（Compile Include/Remove, ProjectReference）
-
-未完了:
 - CLI オプションの結合テスト
 
 成果物:
@@ -71,7 +69,6 @@
 
 ## 次の作業（候補）
 - 循環依存検出（DFS で最小実装）
-- CLI 統合テストの追加
 - 例外・警告出力の整理
 
 ## 作業状況の管理
