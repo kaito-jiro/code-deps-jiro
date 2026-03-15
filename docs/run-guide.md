@@ -55,7 +55,7 @@ dotnet src/CodeDepsJiro/bin/Debug/net10.0/CodeDepsJiro.dll ./path/to/MyProject
 
 ## 6. オプション
 - `--output <file>`: 出力ファイル（未指定時は標準出力）
-- `--filter <pattern>`: 名前空間フィルタ
+- `--filter <pattern>`: 将来拡張用の受け付けオプション（現状は解析結果に未適用）
 - `--rules <file>`: ルールファイル指定
 - `--exclude <pattern>`: 除外パス指定
 

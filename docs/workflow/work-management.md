@@ -22,6 +22,7 @@
 - CLI オプション追加時は `docs/project.md`、`docs/run-guide.md`、README を更新する
 - 出力形式変更時は `docs/project.md`、`docs/design/detailed-design.md`、`docs/workflow/testing.md` を更新する
 - コンポーネント責務変更時は `docs/design/class-diagram.md`、`docs/design/class-details.md`、`docs/design/detailed-design.md` を更新する
+- テスト観点/ケースを新規追加した場合は `docs/tests/` の該当計画書と `docs/workflow/testing.md` を更新する
 - フェーズ進捗変更時は `docs/workflow/roadmap.md` を更新し、必要に応じて本書も更新する
 
 ## 5. PR 前チェックリスト

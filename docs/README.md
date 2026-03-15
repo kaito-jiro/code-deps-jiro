@@ -30,6 +30,10 @@
 - `docs/workflow/work-management.md`
   - Issue/PR/ブランチ運用、ドキュメント更新ルール、PR 前チェックリスト。
 
+## テスト計画ドキュメント（`docs/tests/`）
+- `docs/tests/cli-options-integration-test-plan.md`
+  - CLIオプション結合テストの観点、テストケース、実装方針。
+
 ## 参照ルール
 - 仕様変更時の更新先は `docs/workflow/work-management.md` の「ドキュメント更新ルール」を正本とする。
 - 実行方法の詳細は `docs/run-guide.md` を正本とする。
@@ -52,6 +56,8 @@
   - 設計仕様・構造定義・クラス責務など実装根拠を配置する。
 - `docs/workflow/`:
   - 進捗管理、テスト運用、Issue/PR 運用ルールを配置する。
+- `docs/tests/`:
+  - 機能単位のテスト計画やテスト観点メモを配置する。
 
 ## 廃止ルール
 - docs の責務定義は本ファイルを正本とし、作業完了後に一時的な整理資料は廃止する。
